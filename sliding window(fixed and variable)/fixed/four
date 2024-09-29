@@ -1,0 +1,40 @@
+class Solution:
+    def resultsArray(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        result = []
+        for i in range(n - k + 1):
+            is_valid = True
+            max_element = nums[i]
+            for j in range(i, i + k - 1):
+                if nums[j] + 1 != nums[j + 1]:
+                    is_valid = False
+                    break
+                max_element = max(max_element, nums[j])
+            
+            if is_valid:
+                result.append(max(max_element, nums[i + k - 1]))
+            else:
+                result.append(-1)
+        
+        return result
+    
+
+    def results_array(nums, k):
+    res = []
+    cons = 1  # To keep track of the length of consecutive increasing numbers
+    
+    for i in range(len(nums)):
+        if i > 0 and nums[i] == nums[i - 1] + 1:
+            cons += 1
+        else:
+            cons = 1
+        
+        if i + 1 >= k:
+            res.append(nums[i] if cons >= k else -1)
+    
+    return res
+
+# Example usage
+nums = [1, 2, 3, 4, 5, 6, 7]
+k = 3
+print(results_array(nums, k))  # Output will depend on the input list and k value

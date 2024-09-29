@@ -1,0 +1,32 @@
+from collections import deque
+
+class CircularQueue:
+    def _init_(self, k):
+        self.queue = deque(maxlen=k)
+        self.sum = 0
+
+    def push(self, n):
+        if len(self.queue) == self.queue.maxlen:
+            self.sum -= self.queue[0]  # Subtract the oldest element from the sum
+        self.queue.append(n)
+        self.sum += n  # Add the new element to the sum
+
+    def average(self):
+        return self.sum / len(self.queue)
+
+def sliding_window_average():
+    k = int(input("Enter the size of the sliding window: "))
+    q = CircularQueue(k)
+
+    while True:
+        n = int(input("Enter a number (-1 to end): "))
+        if n == -1:
+            break
+
+        q.push(n)
+        print(f"{q.average():.2f}", end=" ")
+
+    print()
+
+# Running the example
+sliding_window_average()

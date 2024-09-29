@@ -1,0 +1,21 @@
+from collections import deque
+
+def process_queue(A, K):
+    queue = deque()  # Initialize an empty deque to act as the queue
+    total_sum = 0    # Initialize the sum to 0
+
+    for i in range(len(A)):
+        if len(queue) == K:  # If the queue size is K
+            element = queue.popleft()  # Remove element from the front
+            total_sum -= element       # Subtract it from the sum
+
+        queue.append(A[i])  # Add the current element to the queue
+        total_sum += A[i]    # Add it to the sum
+
+        if len(queue) == K:  # If the queue size is K
+            print(total_sum)  # Print the sum to the output
+
+# Example usage
+A = [1, 2, 3, 4, 5, 6]
+K = 3
+process_queue(A, K)

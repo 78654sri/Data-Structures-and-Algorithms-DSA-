@@ -1,0 +1,27 @@
+from collections import deque
+
+def add_price(prices, window_days, price, day):
+    # Remove prices that are outside the sliding window
+    while prices and prices[0][1] < (day - window_days + 1):
+        prices.popleft()
+    # Add the new price
+    prices.append((price, day))
+
+def get_max(prices):
+    max_price = float('-inf')  # Start with the smallest possible value
+    for price, _ in prices:
+        if price > max_price:
+            max_price = price
+    return max_price
+
+# Example usage
+window_days = 3
+prices = deque()
+
+add_price(prices, window_days, 100, 1)
+add_price(prices, window_days, 90, 2)
+add_price(prices, window_days, 95, 3)
+add_price(prices, window_days, 110, 4)
+
+max_price = get_max(prices)
+print(max_price)  # Output: 110

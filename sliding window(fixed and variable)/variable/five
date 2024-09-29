@@ -1,0 +1,39 @@
+def length_of_longest_substring(s):
+    n = len(s)
+    result = 0
+
+    for start in range(n):
+        visited = set()
+
+        for end in range(start, n):
+            if s[end] in visited:
+                break
+
+            visited.add(s[end])
+            result = max(result, end - start + 1)
+
+    return result
+
+# Example usage
+s = "abcabcbb"
+print(length_of_longest_substring(s))  # Output: 3
+
+
+def length_of_longest_substring(s):
+    n = len(s)
+    result = 0
+    char_index = {}
+    start = 0
+
+    for end in range(n):
+        if s[end] in char_index and char_index[s[end]] >= start:
+            start = char_index[s[end]] + 1
+        
+        char_index[s[end]] = end
+        result = max(result, end - start + 1)
+
+    return result
+
+# Example usage
+s = "abcabcbb"
+print(length_of_longest_substring(s))  # Output: 3

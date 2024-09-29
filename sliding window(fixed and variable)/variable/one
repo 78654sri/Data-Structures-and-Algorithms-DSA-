@@ -1,0 +1,20 @@
+arr = [1, 2, 3, 4, 5]
+k = 7
+l, r = 0, 0
+n = len(arr)
+current_sum = 0
+max_length = 0
+
+while r < n:
+    current_sum += arr[r]
+    
+    while current_sum > k:  # Shrink the window until the sum is ≤ k
+        current_sum -= arr[l]
+        l += 1
+    
+    if current_sum <= k:  # Check if the current window meets the condition
+        max_length = max(max_length, r - l + 1)
+    
+    r += 1  # Expand the window
+
+print("The longest subarray with sum ≤", k, "is of length", max_length)

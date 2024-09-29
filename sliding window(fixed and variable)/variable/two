@@ -1,0 +1,24 @@
+INT_MAX = float("inf")
+
+def min_sub_array_len(k, nums):
+    if not nums:
+        return 0
+    n = len(nums)
+    ans = INT_MAX
+    left = 0
+    sum = 0
+    for i in range(n):
+        sum += nums[i]
+        while sum >= k:
+            ans = min(ans, i + 1 - left)
+            sum -= nums[left]
+            left = left + 1
+    if ans != INT_MAX:
+        print(ans)
+    else:
+        print("0")
+    return
+
+n, k = map(int, input().split())
+nums = list(map(int, input().split()))
+min_sub_array_len(k, nums)
